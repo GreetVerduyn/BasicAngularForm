@@ -1,0 +1,24 @@
+= BasicAngularForm
+
+==== step 1:
+install angular, following the instructions I found on this site:
+https://www.npmjs.com/package/@angular/cli/v/10.1.7
+
+- I clone this exercise on my computer
+- I checked if I have npm installed by typing "npm -v" (or "npm -version") in the terminal.
+- I installed Angular Globally cli (command line interface) with "npm install -g @angular/cli" and checked afterwards
+whether it was installed with the command "ng version".
+- I go to my exercise in the terminal and create a new project( friendsBook): "ng new friendsBook"
+- I go in the terminale inside the "friendsBook" folder and run the command ng serve --port 4500.
+- Now I can check out my angular app on localhost:4500.
+
+- In PhpStorm I can navigate to project-name/src/app, and find 2 files who prepare the webpage together.
+        1. The template: "app.component.html"
+        2. The component: "app.component.ts"
+
+(The view you see in the page is produced by the combination of that template and the component that brings the logic to the template.)
+
+Before we actually start, we make the app.component.html empty.
+
+Inside the AppComponent class (in app.component.ts) we'll write the logic,
+and in the template (app.component.html) we write the html.
