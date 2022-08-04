@@ -1,0 +1,129 @@
+= Theory
+
+Each component has an .html (the view, also called template), a .CSS (format) and  a .ts (code/data).
+The code is written in the TS and called in the HTML bij "{{ }}".
+
+
+== Key features:
+1. input properties (template events):
+    -  value property
+
+        in .html:
+        <input class="demo value="test"> (plain string in the value property)
+        <input class="demo [value]="data.title"> (in this *value property*, we put the value of the value.data expression (from the .ts))
+
+        in .ts:
+        export class nameOfClass {
+             data = {
+             title: 'Angular test'
+             };
+        }
+
+        in .css: (formatting the file)
+            input.demo {
+                 border:...
+                 width:...
+                 ...
+            }
+
+
+    - give name to elements (template reference)
+
+        in .html:
+            <input class="demo [value]="data.title" #titleInput>
+        Now you can refer to it in all the .html
+
+        in .ts:
+            export class nameOfClass {
+                data = {
+                    title: 'Angular test'
+                };
+            }
+
+        in .css: (formatting the file)
+
+
+
+2. browser events
+
+    - (vb onKeyUp):
+
+        in .html:
+        <input class="demo (keyup)= "onKeyUp(titleInput.value)"
+                [value]="data.title" #titleInput>
+        => Now we refer to the #titleInput (from above)
+
+
+        in .ts:
+             export class nameOfClass {
+                 data= {
+                    title: 'Angular Test'
+                    }
+                onKeyUp(newTitle:string){
+                    this.data.title = newTitle;
+                }
+            => now data.title is not 'Angular Test' anymore, but what is typed in the inputbox.
+
+        in .css: (formatting the file)
+
+
+     - (vb click event):
+
+        in .html:
+             <img width="300" (click)="inLogoClicked()"
+                 alt="Angular Logo" src=data">
+
+        in .ts:
+             export class nameOfClass {
+                 onLogoClicked(){
+                    alert('Hello World');
+                 }
+             }
+        => an alertbox will show 'Hello World', when the logo is clicked.
+
+        in .css: (formatting the file)
+
+
+3. automatic synchronisation between data and view:
+    If you adapt .ts -, it will be automatically adjusted on the view
+
+4. security features (build in security)
+
+== build a component
+
+Go to command line, stop the server and put the following command:
+"ng generate component nameComponent"
+=> folder is created with
+
+ .ts :
+    @component({
+        selector:'nameOfComponent',    // defines to which HTML it belongs to
+        templateUrl:'./nameOfComponent.component.html',    // points to the location in the file system of template file
+        styleUrl: ['./nameOfComponent.component.css']
+    }
+    export class nameOfComponent imlements OnIt {
+            constructor() {}
+            ngOnIt(){
+            }
+    };
+
+ .css (to style this component)
+
+ .html (empty)
+you have to add code, f.e. a div
+<div class = "nameOfComponent">
+  ......
+</div>
+
+!! in app.component.html,
+
+  <nameOfComponent></nameOfComponent>
+
+needs te be added
+
+
+
+
+
+
+

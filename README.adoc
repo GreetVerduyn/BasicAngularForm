@@ -22,3 +22,12 @@ Before we actually start, we make the app.component.html empty.
 
 Inside the AppComponent class (in app.component.ts) we'll write the logic,
 and in the template (app.component.html) we write the html.
+
+==== EXERCISE
+
+In the HTML file, I add a form with the required inputs:
+ 1. First name
+ 2. Last name
+ 3. Email
+ 4. Phone number
+ 5. Favourite language (html, css, js, php, ...), this will be a select with options
