@@ -99,7 +99,7 @@ Go to command line, stop the server and put the following command:
 
  .ts :
     @component({
-        selector:'nameComponent',    // defines to which HTML it belongs to
+        selector:'nameComponent',    // defines to which HTML it belongs to  !!! OPM!!!
         templateUrl:'./nameComponent.component.html',    // points to the location in the file system of template file
         styleUrl: ['./nameComponent.component.css']
     }
@@ -119,11 +119,11 @@ you have to add code, f.e. a div
 
 !! in app.component.html,
 
-  <nameComponent></nameComponent>
+  <nameComponent></nameComponent>   !!!OPM!!!
 
 needs te be added
 
-
+!!! OPM!!! these names should be exactly the same!!!
 
 
 
