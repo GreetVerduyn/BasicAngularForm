@@ -89,19 +89,21 @@ The code is written in the TS and called in the HTML bij "{{ }}".
 
 4. security features (build in security)
 
-== build a component
+== build a new component
 
 Go to command line, stop the server and put the following command:
-"ng generate component nameComponent"
+
+ ng generate component nameComponent
+
 => folder is created with
 
  .ts :
     @component({
-        selector:'nameOfComponent',    // defines to which HTML it belongs to
-        templateUrl:'./nameOfComponent.component.html',    // points to the location in the file system of template file
-        styleUrl: ['./nameOfComponent.component.css']
+        selector:'nameComponent',    // defines to which HTML it belongs to
+        templateUrl:'./nameComponent.component.html',    // points to the location in the file system of template file
+        styleUrl: ['./nameComponent.component.css']
     }
-    export class nameOfComponent imlements OnIt {
+    export class nameComponent imlements OnIt {
             constructor() {}
             ngOnIt(){
             }
@@ -111,13 +113,13 @@ Go to command line, stop the server and put the following command:
 
  .html (empty)
 you have to add code, f.e. a div
-<div class = "nameOfComponent">
+<div class = "nameComponent">
   ......
 </div>
 
 !! in app.component.html,
 
-  <nameOfComponent></nameOfComponent>
+  <nameComponent></nameComponent>
 
 needs te be added
 
