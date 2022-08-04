@@ -98,12 +98,15 @@ Go to command line, stop the server and put the following command:
 => folder is created with
 
  .ts :
+    import { Component, OnInit } from '@angular/cor';
+    import {COURSES} from '../db-data';
+
     @component({
         selector:'nameComponent',    // defines to which HTML it belongs to  !!! OPM!!!
         templateUrl:'./nameComponent.component.html',    // points to the location in the file system of template file
         styleUrl: ['./nameComponent.component.css']
     }
-    export class nameComponent imlements OnIt {
+    export class nameComponent implements OnIt {
             constructor() {}
             ngOnIt(){
             }
@@ -120,12 +123,79 @@ you have to add code, f.e. a div
 !! in app.component.html,
 
   <nameComponent></nameComponent>   !!!OPM!!!
-
+  <nameComponent></nameComponent>
+  ...                               // you can add this component as many times as you want
 needs te be added
 
 !!! OPM!!! these names should be exactly the same!!!
 
 
+=== make an array accessible in the project
+Make a db-data.ts in de src folder and put an array in it with some objects.
+
+ export const COURSE: any = [
+    {
+    id=1,
+    description: "test"
+    ...
+    }
+    {
+    ...
+    }
+]
+
+You can make this data available in template (.htlm) file by making a variable in the app.component.ts file:
+
+ import { Component } from '@angular/cor';
+ import {COURSES} from '../db-data';
+
+ @Component({
+ selector:'app-root',
+ templateUrl: './app.component.html'.
+ styleUrls: [./app.component.css']
+ })
+
+ export class AppComponent{
+    coreCourse = COURSES [0];
+    AngularCourse = COURSE [1];
+    ....
+    }
+
+now in the html file, you can enter it by
+
+  {{coreCourse.description}}, {{AngularCourse.description}}
+
+
+OR inside a component we call in the html
+
+  <nameComponent [title]= "AngularCourse.description"></nameComponent>
+
+this element should also be added in the class nameComponentComponent (nameComponent.Component.ts)
+
+  import { Component, OnInit } from '@angular/cor';
+  import {COURSES} from '../db-data';
+
+    @component({
+        selector:'nameComponent',
+// defines to which HTML it belongs to  !!! OPM!!!
+        templateUrl:'./nameComponent.component.html',
+// points to the location in the file system of template file
+        styleUrl: ['./nameComponent.component.css']
+    }
+    export class nameComponent implements OnIt {
+            @Input()                 // by this, Angular knows it is an input property
+            title:string;            // of the  <nameComponent></nameComponent> from the html
+            constructor() {}
+            ngOnIt(){
+            }
+    };
+
+This way, we can adapt a component, over and over again when you call it in the html.
 
 
 
+
+
+
+
+[]

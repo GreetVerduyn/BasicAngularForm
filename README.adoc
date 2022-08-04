@@ -31,3 +31,5 @@ In the HTML file, I add a form with the required inputs:
  3. Email
  4. Phone number
  5. Favourite language (html, css, js, php, ...), this will be a select with options
+
+I don't get it at all, so I 'll see some more of the tutorial first.
