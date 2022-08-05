@@ -1,8 +1,42 @@
 = Theory
 
-Each component has an .html (the view, also called template), a .CSS (format) and  a .ts (code/data).
-The code is written in the TS and called in the HTML bij "{{ }}".
+Angular is a platform and framework for building single-page client applications using HTML and TypeScript.
+It implements core and optional functionality as a set of TypeScript libraries that you import into your applications.
 
+The architecture of an Angular application relies on certain fundamental concepts.
+The basic building blocks of the Angular framework are Angular components that are organized into NgModules.
+An application always has at least a root module that enables bootstrapping, and typically has many more feature modules.
+Modules, components and services are classes that use decorators. These decorators mark their type and provide metadata
+that tells Angular how to use them.
+An application's components (app.component.html) typically define many views, arranged hierarchically.
+Angular provides the Router service to help you define navigation paths among views.
+The router provides sophisticated in-browser navigational capabilities.
+
+. Components:
+ - Each component has an .html (the view, also called template), a .CSS (format) and  a .ts (code/data).
+ - The code is written in the TS and called in the HTML bij "{{ }}".
+ - Components define views, which are sets of screen elements that Angular can choose among and modify according to your program logic and data
+ - Components use services, which provide specific functionality not directly related to views.
+
+. Services:
+ - Services providers can be injected into components as dependencies, making your code modular, reusable, and efficient.
+ - it provides 'communication' between several components, api, ...
+
+. Modules: NgModules collect related code into functional sets (services, components,...)
+
+. Decorators: (@Component, @NgModule, ...)
+ - decorators mark the type of classes and provide metadata that tells Angular how to use them.
+   It gives extra functionality to an existing class.
+ - You can use more than 1 decorator for a class
+
+. Metadata:
+- The metadata for a service class (given by a decorator) provides the information Angular needs to make it
+available to components through dependency injection (DI)
+
+. other elements:
+ - directives: can make changes to your html ( *ngForm, *ngIf, ...)
+ - pipes (|):are used to convert data
+   (for example to filter, convert data to json, ...)
 
 == Key features:
 1. input properties (template events):
@@ -208,7 +242,12 @@ each time passing it the array value as context for string interpolation or bind
 usually an array but anything that can be iterated over in a for-of loop.
 
 
+=== Building a template-driven form
+https://angular.io/guide/forms
 
+Template-driven forms use two-way data binding to update the data model in the component
+as changes are made in the template and vice versa.
+Template-driven forms are suitable for small or simple forms, while reactive forms are more scalable and suitable for complex forms
 
 
 []

@@ -1,6 +1,6 @@
 = BasicAngularForm
 
-==== step 1:
+== step 1:
 install angular, following the instructions I found on this site:
 https://www.npmjs.com/package/@angular/cli/v/10.1.7
 
@@ -23,20 +23,58 @@ Before we actually start, we make the app.component.html empty.
 Inside the AppComponent class (in app.component.ts) we'll write the logic,
 and in the template (app.component.html) we write the html.
 
-==== EXERCISE
+== EXERCISE
 
-In the HTML file, I add a form with the required inputs:
- 1. First name
- 2. Last name
- 3. Email
- 4. Phone number
- 5. Favourite language (html, css, js, php, ...), this will be a select with options
+1. In the HTML file, I add a form with the required inputs:
+    - First name
+    - Last name
+    - Email
+    - Phone number
+    - Favourite language (html, css, js, php, ...), this will be a select with options
 
 I don't get it at all, so I 'll see some more of the tutorial first.
 
-In html, I created, the input fields, then I made the array of the languages in 'class FormComponent of the form.components.ts'.
-Then I create a ngFor-loop in the option of the select box.
+[start=2]
+2. In html, I created, the input fields, then I made the array of the languages in 'class FormComponent of the form.components.ts'.
+3. Then I create a ngFor-loop in the option of the select box.
 
  <option *ngFor="let language of languages">{{language}}</option>
 
 NOTE:   to show the whole array on the page (to check), you can use {{languages | json}}
+
+[start=4]
+4. Now I have to connect the html form with angular.
+https://angular.io/guide/forms
+
+*In the app.module.ts*,  I import the FormsModule from @angular/forms,
+by adding 'FormsModule' in the
+imports: [] array in @NgModule({})
+
+[source,typescript]
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { FormComponent } from '../components/form/form.component';
+import {FormsModule} from "@angular/forms";
+
+[source,typescript]
+@NgModule({
+declarations: [
+AppComponent,
+FormComponent,
+],
+imports: [
+BrowserModule,
+FormsModule
+],
+providers: [],
+bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+I add #formName="ngForm" to the (html) form to create two-way data bindings for reading and writing input-control values.
+This will make "formName" a variable which contains all the data of the form in realtime.
+
+[source,html]
+<form #friendform="ngForm">
