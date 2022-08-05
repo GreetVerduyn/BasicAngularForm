@@ -25,7 +25,7 @@ and in the template (app.component.html) we write the html.
 
 == EXERCISE
 
-1. In the HTML file, I add a form with the required inputs:
+. In the HTML file, I add a form with the required inputs:
     - First name
     - Last name
     - Email
@@ -35,15 +35,15 @@ and in the template (app.component.html) we write the html.
 I don't get it at all, so I 'll see some more of the tutorial first.
 
 [start=2]
-2. In html, I created, the input fields, then I made the array of the languages in 'class FormComponent of the form.components.ts'.
-3. Then I create a ngFor-loop in the option of the select box.
+. In html, I created, the input fields, then I made the array of the languages in 'class FormComponent of the form.components.ts'.
+. Then I create a ngFor-loop in the option of the select box.
 
  <option *ngFor="let language of languages">{{language}}</option>
 
 NOTE:   to show the whole array on the page (to check), you can use {{languages | json}}
 
 [start=4]
-4. Now I have to connect the html form with angular.
+. Now I have to connect the html form with angular.
 https://angular.io/guide/forms
 https://blog.angular-university.io/introduction-to-angular-2-forms-template-driven-vs-model-driven/
 
@@ -51,7 +51,7 @@ https://blog.angular-university.io/introduction-to-angular-2-forms-template-driv
 by adding 'FormsModule' in the 'imports: [] array in @NgModule({}).
 For more flexibility, I also insert
 
-[source,typescript]
+[source,angularjs]
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -59,7 +59,7 @@ import { AppComponent } from './app.component';
 import { FormComponent } from '../components/form/form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
-[source,typescript]
+[source,angularjs]
 @NgModule({
  declarations: [
  AppComponent,
@@ -77,7 +77,7 @@ export class AppModule { }
 
 Instead of adding a new "friend" model to the project, I create a variable 'FriendsForm' *in form.components.ts*,  which will be linked on HTML.
 
-[source,typescript]
+[source,angularjs]
 
 export class FormComponent implements OnInit {
   languages: string[] = ['html', 'css', 'javaScript', 'php', 'typeScript'];
@@ -98,7 +98,7 @@ between business logic and presentation logic, which leads to clearer, easier to
 
 each input needs te be connected
 
-[source,html]
+[source,angular2html]
 <form [formGroup]="friendsForm">
   <label>First name:</label><br>
   <input type="text" formControlName="firstName"><br><br>
@@ -112,5 +112,37 @@ each input needs te be connected
   <select formControlName="favouriteLanguage">
     <option *ngFor="let language of languages" [value]="language">{{language}}</option>
   </select>
+
+[start=5]
+. Next step is to display when a field is invalid to the user.
+https://angular.io/guide/form-validation
+
+In a reactive form, the source of truth is the component class. Instead of adding validators through attributes in the template,
+you add validator functions directly to the form control model in the component class.
+Angular then calls these functions whenever the value of the control changes.
+
+
+
+In the form.component.ts, I created a function (showInvalid), which return a boolean and make it possible to
+pass an invalid statement to the form elements.
+
+In the Friendsform (form.component.ts, class FormComponent), I add the validators
+ - firstName and lastname: validators.patters(...)       https://angular.io/api/forms/PatternValidator
+ - email: validators.email
+ - phone: validators.patters(...)  https://regex101.com/library/hN5oL4
+
+
+In the css (form.component.css), I pass the formatting for invalid fields (red border)
+
+in the form of the html, I added to each input ' [class.invalid]="showInvalid('name inputlield') '.
+(The class only appears if the boolean is true)
+
+[start=6]
+. If all the fields are valid, the forms valid property will also be set to valid
+[source, angular2html]
+  <input type="submit" value="Submit" [disabled]="!friendsForm.valid">
+
+
+
 
 

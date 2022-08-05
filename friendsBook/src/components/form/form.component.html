@@ -8,20 +8,20 @@
 
 <form [formGroup]="friendsForm">
   <label>First name:</label><br>
-  <input type="text" formControlName="firstName"><br><br>
+  <input type="text" id="firstName" formControlName="firstName" [class.invalid]="showInvalid('firstName')" ><br><br>
   <label>Last name:</label><br>
-  <input type ="text" formControlName="lastName"><br><br>
+  <input type ="text" formControlName="lastName" [class.invalid]="showInvalid('lastName')"><br><br>
   <label>Email:</label><br>
-  <input type="text" formControlName="email"><br><br>
+  <input type="text" formControlName="email" [class.invalid]="showInvalid('email')"><br><br>
   <label>Phone number:</label><br>
-  <input type="text" formControlName="phone"><br><br>
+  <input type="text" formControlName="phone" [class.invalid]="showInvalid('phone')"><br><br>
   <label>Favourite language:</label><br>
   <select formControlName="favouriteLanguage">
     <option *ngFor="let language of languages" [value]="language">{{language}}</option>
   </select>
 
 
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" [disabled]="!friendsForm.valid">
 
   {{friendsForm.getRawValue() | json}}
   {{friendsForm.valid}}
