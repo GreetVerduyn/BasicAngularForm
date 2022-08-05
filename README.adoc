@@ -33,3 +33,10 @@ In the HTML file, I add a form with the required inputs:
  5. Favourite language (html, css, js, php, ...), this will be a select with options
 
 I don't get it at all, so I 'll see some more of the tutorial first.
+
+In html, I created, the input fields, then I made the array of the languages in 'class FormComponent of the form.components.ts'.
+Then I create a ngFor-loop in the option of the select box.
+
+ <option *ngFor="let language of languages">{{language}}</option>
+
+NOTE:   to show the whole array on the page (to check), you can use {{languages | json}}
