@@ -19,9 +19,37 @@ The router provides sophisticated in-browser navigational capabilities.
  - Components use services, which provide specific functionality not directly related to views.
 
 . Services:
- - Services providers can be injected into components as dependencies, making your code modular, reusable, and efficient.
  - it provides 'communication' between several components, api, ...
+ - Services providers can be injected into components as dependencies, making your code modular, reusable, and efficient.
 
+    in a component (name.component.ts)
+[source,angularjs]
+@Component({
+selector: 'app-form',
+templateUrl: './form.component.html',
+styleUrls: ['./form.component.css'],
+providers: []
+})
+
+    OR in a Module
+
+    [source,angularjs]
+    @NgModule({
+    declarations: [
+    AppComponent,
+    FormComponent,
+    ],
+    imports: [
+    BrowserModule,
+    FormsModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+    })
+
+
+
+[start=3]
 . Modules: NgModules collect related code into functional sets (services, components,...)
 
 . Decorators: (@Component, @NgModule, ...)
