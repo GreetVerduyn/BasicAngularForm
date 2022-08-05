@@ -6,22 +6,25 @@
   </mat-form-field>
 </form> -->
 
-<form #friendform="ngForm">
+<form [formGroup]="friendsForm">
   <label>First name:</label><br>
-  <input type="text"><br><br>
+  <input type="text" formControlName="firstName"><br><br>
   <label>Last name:</label><br>
-  <input type ="text"><br><br>
+  <input type ="text" formControlName="lastName"><br><br>
   <label>Email:</label><br>
-  <input type="text"><br><br>
+  <input type="text" formControlName="email"><br><br>
   <label>Phone number:</label><br>
-  <input type="text"><br><br>
+  <input type="text" formControlName="phone"><br><br>
   <label>Favourite language:</label><br>
-  <select>
-    <option *ngFor="let language of languages">{{language}}</option>
+  <select formControlName="favouriteLanguage">
+    <option *ngFor="let language of languages" [value]="language">{{language}}</option>
   </select>
 
 
   <input type="submit" value="Submit">
+
+  {{friendsForm.getRawValue() | json}}
+  {{friendsForm.valid}}
 </form>
 
 

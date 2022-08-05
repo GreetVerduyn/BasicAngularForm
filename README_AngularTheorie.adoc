@@ -1,5 +1,7 @@
 = Theory
 
+=== Angular concepts
+
 Angular is a platform and framework for building single-page client applications using HTML and TypeScript.
 It implements core and optional functionality as a set of TypeScript libraries that you import into your applications.
 
@@ -19,6 +21,8 @@ The router provides sophisticated in-browser navigational capabilities.
  - Components use services, which provide specific functionality not directly related to views.
 
 . Services:
+ - For data or logic that isn't associated with a specific view, and that you want to share across components,
+   you create a service class. A service class definition is immediately preceded by the @Injectable() decorator.
  - it provides 'communication' between several components, api, ...
  - Services providers can be injected into components as dependencies, making your code modular, reusable, and efficient.
 
@@ -65,6 +69,40 @@ available to components through dependency injection (DI)
  - directives: can make changes to your html ( *ngForm, *ngIf, ...)
  - pipes (|):are used to convert data
    (for example to filter, convert data to json, ...)
+ - ...
+
+image::image-2022-08-05-13-56-01-780.png[]
+
+=== Template syntax
+
+Each Angular template in your application is a section of HTML to include as a part of the page that the browser displays.
+An Angular HTML template renders a view, or user interface, in the browser, just like regular HTML, but with a lot more functionality.
+
+When you generate an Angular application with the Angular CLI, the app.component.html file is the default
+template containing placeholder HTML.
+
+The template syntax guides show you how to control the UX/UI by coordinating data between the class and the template.
+Almost all HTML syntax is valid template syntax. However, because an Angular template is part of an overall webpage,
+and not the entire page, you don't need to include elements such as <html>, <body>, or <base>, and can focus exclusively on the part of the page you are developing.
+
+
+ - Interpolation: Interpolation refers to embedding expressions into marked up text. By default, interpolation uses the double curly braces {{ and }} as delimiters.
+ - Template statements: 	Template statements are methods or properties that you can use in your HTML to respond to user events.
+ - Binding syntax: 	Data binding automatically keeps your page up-to-date based on your application's state.
+                    You use data binding to specify things such as the source of an image, the state of a button, or data for a particular user
+ - Property binding: 	Set properties of target elements or directive @Input() decorators.
+ - Attribute, class, and style bindings: 	Set the value of attributes, classes, and styles.
+ - Event binding: 	Event binding lets you listen for and respond to user actions such as keystrokes, mouse movements, clicks, and touches
+ - Two-way binding: 	Share data between a class and its template.
+ - Built-in directives :	Listen to and modify the behavior and layout of HTML.
+ - Template reference variables: 	Use special variables to reference a DOM element within a template.
+ - Inputs and Outputs: 	Share data between the parent context and child directives or components
+ - Template expression operators:	The Angular template expression language employs a
+    subset of JavaScript syntax supplemented with a few special operators for specific scenarios
+    (the pipe operator (|), The non-null assertion operator (!), The $any() type cast function,...)
+ - SVG in templates :	Dynamically generate interactive graphics.
+
+
 
 == Key features:
 1. input properties (template events):

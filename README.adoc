@@ -45,10 +45,11 @@ NOTE:   to show the whole array on the page (to check), you can use {{languages 
 [start=4]
 4. Now I have to connect the html form with angular.
 https://angular.io/guide/forms
+https://blog.angular-university.io/introduction-to-angular-2-forms-template-driven-vs-model-driven/
 
 *In the app.module.ts*,  I import the FormsModule from @angular/forms,
-by adding 'FormsModule' in the
-imports: [] array in @NgModule({})
+by adding 'FormsModule' in the 'imports: [] array in @NgModule({}).
+For more flexibility, I also insert
 
 [source,typescript]
 
@@ -56,25 +57,59 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormComponent } from '../components/form/form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 [source,typescript]
 @NgModule({
-declarations: [
-AppComponent,
-FormComponent,
+ declarations: [
+ AppComponent,
+ FormComponent,
 ],
 imports: [
-BrowserModule,
-FormsModule
-],
-providers: [],
-bootstrap: [AppComponent]
+ BrowserModule,
+ FormsModule,
+ ReactiveFormsModule],
+ providers: [],
+ bootstrap: [AppComponent]
 })
 export class AppModule { }
 
-I add #formName="ngForm" to the (html) form to create two-way data bindings for reading and writing input-control values.
-This will make "formName" a variable which contains all the data of the form in realtime.
+*in form.components.ts*, I create a variable 'FriendsForm', which will be linked on HTML.
+
+[source,typescript]
+
+export class FormComponent implements OnInit {
+  languages: string[] = ['html', 'css', 'javaScript', 'php', 'typeScript'];
+
+  friendsForm = new FormGroup({
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    phone: new FormControl(''),
+    favouritLanguage: new FormControl(''),
+  });
+
+
+In stead of '#formName="ngForm" ', I added ' [formGroup]="friendsForm" ' to the (html) form to create
+two-way data bindings for reading and writing input-control values.
+(Reactive Forms scale better and support better more advanced use cases. Reactive Forms also promote a clearer separation
+between business logic and presentation logic, which leads to clearer, easier to read and more maintainable HTML templates)
+
+each input needs te be connected
 
 [source,html]
-<form #friendform="ngForm">
+<form [formGroup]="friendsForm">
+  <label>First name:</label><br>
+  <input type="text" formControlName="firstName"><br><br>
+  <label>Last name:</label><br>
+  <input type ="text" formControlName="lastName"><br><br>
+  <label>Email:</label><br>
+  <input type="text" formControlName="email"><br><br>
+  <label>Phone number:</label><br>
+  <input type="text" formControlName="phone"><br><br>
+  <label>Favourite language:</label><br>
+  <select formControlName="favouriteLanguage">
+    <option *ngFor="let language of languages" [value]="language">{{language}}</option>
+  </select>
+
+
