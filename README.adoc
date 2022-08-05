@@ -74,7 +74,8 @@ imports: [
 })
 export class AppModule { }
 
-*in form.components.ts*, I create a variable 'FriendsForm', which will be linked on HTML.
+
+Instead of adding a new "friend" model to the project, I create a variable 'FriendsForm' *in form.components.ts*,  which will be linked on HTML.
 
 [source,typescript]
 
