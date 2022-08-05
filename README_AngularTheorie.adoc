@@ -193,6 +193,19 @@ this element should also be added in the class nameComponentComponent (nameCompo
 This way, we can adapt a component, over and over again when you call it in the html.
 
 
+=== ng For-loop
+- NgFor does support arrays and array-like objects as well
+- NgFor allows us to loop over data and access each value and index
+- NgFor is a structural directive, meaning that it changes the structure of the DOM.
+- Its point is to repeat a given HTML template once for each value in an array,
+each time passing it the array value as context for string interpolation or binding.
+
+- The syntax is
+
+ *ngFor="let <value> of <collection>".     // *ngFor=let language of languages
+
+<value> is a variable name of your choosing, <collection> is a property on your component which holds a collection,
+usually an array but anything that can be iterated over in a for-of loop.
 
 
 

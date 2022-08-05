@@ -45,10 +45,10 @@ A POST request to add a friend to your friend list.
     - 04 88 88 88 88
     - 0      4 8     8 8888 88
     - It's okay to only take Belgian phone numbers into account.
-- Make seperate pages for adding a friend and your friend list.
+- Make separate pages for adding a friend and your friend list.
 - Make a "best friend" list by adding a favourite checkbox to the form
-    - You can also make a seperate page for your best friends
-    - You'll have to make a new app.GET function in your node server
+    - You can also make a separate page for your best friends
+    - You'll have to make a new app GET function in your node server
 - Add extra fields, whatever you like. Examples:
     - Profile picture
     - Signature move

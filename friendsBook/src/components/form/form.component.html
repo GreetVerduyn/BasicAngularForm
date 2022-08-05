@@ -16,7 +16,11 @@
   <label>Phone number:</label><br>
   <input type="text"><br><br>
   <label>Favourite language:</label><br>
-  <input type="text"><br><br>
+  <select>
+    <option *ngFor="let language of languages">{{language}}</option>
+  </select>
+
+
   <input type="submit" value="Submit">
 </form>
 
