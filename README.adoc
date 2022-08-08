@@ -35,7 +35,7 @@ and in the template (app.component.html) we write the html.
 I don't get it at all, so I 'll see some more of the tutorial first.
 
 [start=2]
-. In html, I created, the input fields, then I made the array of the languages in 'class FormComponent of the form.components.ts'.
+. In html, I created, the input fields, then I made the array of the languages in 'class FormComponent of the form.components.ts'. (instruction 9)
 . Then I create a ngFor-loop in the option of the select box.
 
  <option *ngFor="let language of languages">{{language}}</option>
@@ -43,7 +43,7 @@ I don't get it at all, so I 'll see some more of the tutorial first.
 NOTE:   to show the whole array on the page (to check), you can use {{languages | json}}
 
 [start=4]
-. Now I have to connect the html form with angular.
+. Now I have to connect the html form with angular. (instruction 10 & 11)
 https://angular.io/guide/forms
 https://blog.angular-university.io/introduction-to-angular-2-forms-template-driven-vs-model-driven/
 
@@ -75,7 +75,7 @@ imports: [
 export class AppModule { }
 
 
-Instead of adding a new "friend" model to the project, I create a variable 'FriendsForm' *in form.components.ts*,  which will be linked on HTML.
+I create a variable 'FriendsForm' *in form.components.ts*,  which will be linked on HTML.
 
 [source,angularjs]
 
@@ -114,7 +114,7 @@ each input needs te be connected
   </select>
 
 [start=5]
-. Next step is to display when a field is invalid to the user.
+. Next step is to display when a field is invalid to the user.(instruction 12)
 https://angular.io/guide/form-validation
 
 In a reactive form, the source of truth is the component class. Instead of adding validators through attributes in the template,
@@ -138,11 +138,73 @@ in the form of the html, I added to each input ' [class.invalid]="showInvalid('n
 (The class only appears if the boolean is true)
 
 [start=6]
-. If all the fields are valid, the forms valid property will also be set to valid
+. If all the fields are valid, the forms valid property will also be set to valid (instruction 13)
+
 [source, angular2html]
   <input type="submit" value="Submit" [disabled]="!friendsForm.valid">
 
+[start=7]
+. next step is to submit data to the server (instruction 14)
+I read these instructions, but did not understand what they are talking about https://angular.io/api/forms/NgForm#description
+So I needed some more explanation...
+
+ - By adding the ngSubmit property to the form (in form.component.html), I can bind a function (addFriend) to it and use that function in the
+component class to trigger it on submit
+
+[source,angular2html]
+<form [formGroup]="friendsForm" (ngSubmit)="addFriend()">
+
+ - The function needs to be made in the class FormComponent (form.components.ts).
+
+[source,angularjs]
+  addFriend() {
+    console.log('add friend');
+    const friend: Friend = new Friend(
+      this.friendsForm.get('firstName')?.value,
+      this.friendsForm.get('lastName')?.value,
+      this.friendsForm.get('email')?.value,
+      this.friendsForm.get('phone')?.value,
+      this.friendsForm.get('favouriteLanguage')?.value,
+    );
+    this.addFriendService.addFriend(friend);
+  }
+
+ - Now I first created a map services and then made a service to add this friend to the friendlist server.
+Using the cli for this and input the command 'ng g s addFriend' ( a"ng"ular "g"enerate "s"ervice with name "addFriend").
+
+Note: when you generate a service you'll see that after the name you've given it will automatically add "Service" after it.
+ In this service, I create an addFriend service
+
+[source,angularjs]
+
+import {HttpClient} from "@angular/common/http";
+
+[source,angularjs]
+export class AddFriendService {
+  constructor(private http: HttpClient) { }
+}
+
+ - The HttpClientModule needs to be imported in the app.module.ts, and also be added it to the imports array below.
+
+[start=8]
+. Making an http request to post the data to a server... (instruction 15)
+
+ - I import friend into the form.component.ts
+
+[source,angularjs]
+import {Friend} from "../../app/models/friend";
 
 
+ - In the service, I create a method 'addFriend, with parameter friend and a post request and make a property 'url'
+https://angular.io/guide/observables
 
+[source,angularjs]
+  addFriend(friend: any) {
+    this.http.post(url, friend).subscribe(res => {});
+  }
 
+ - The service needs to be imported in the app.component.ts and needs a constructor in form.component.ts
+
+[source,angularjs]
+  constructor(private addFriendService: AddFriendService) {
+  }

@@ -1,12 +1,6 @@
 
-<!--<form class = "information">
-  <mat-form-field appearance="fill" >
-    <mat-label>Name</mat-label>
-    <input matInput>
-  </mat-form-field>
-</form> -->
 
-<form [formGroup]="friendsForm">
+<form [formGroup]="friendsForm" (ngSubmit)="addFriend()">
   <label>First name:</label><br>
   <input type="text" id="firstName" formControlName="firstName" [class.invalid]="showInvalid('firstName')" ><br><br>
   <label>Last name:</label><br>
@@ -15,13 +9,13 @@
   <input type="text" formControlName="email" [class.invalid]="showInvalid('email')"><br><br>
   <label>Phone number:</label><br>
   <input type="text" formControlName="phone" [class.invalid]="showInvalid('phone')"><br><br>
-  <label>Favourite language:</label><br>
+  <label>Favourite language:</label><br><br>
   <select formControlName="favouriteLanguage">
     <option *ngFor="let language of languages" [value]="language">{{language}}</option>
-  </select>
+  </select><br><br>
 
 
-  <input type="submit" value="Submit" [disabled]="!friendsForm.valid">
+  <input type="submit" value="Submit"   [disabled]="!friendsForm.valid"><br><br>
 
   {{friendsForm.getRawValue() | json}}
   {{friendsForm.valid}}
