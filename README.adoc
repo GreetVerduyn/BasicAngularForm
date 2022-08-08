@@ -210,7 +210,7 @@ https://angular.io/guide/observables
   }
 
 [start=9]
-.Now everything is set up to send data to the local API. (instruction 16)
+.Now everything is set up, we need to send our data to the local API. (instruction 16)
 
  - In 'add-friends.service.ts', I set the port to 9000 (const url: string = 'http://localhost:9000/;) and check if it works by
 running the command 'node server' in the server folder of the terminal and navigate to localhost:9000/.
@@ -241,6 +241,48 @@ language: request.body.favouriteLanguage
 );
 response.send(allFriends);
 });
+
+
+[start=10]
+. The get request also needs to be made (in case we load tha page and when we post data to the server) (instruction 17)
+https://angular.io/guide/http
+
+ - I renamed the (class) addFriendService to  FriendService (friend.service.ts) and mad a method 'getFriend' to return the http (This method returns an observable)
+
+[source,angularjs]
+  getFriends(): Observable<any> {
+    return this.http.get(urlget);
+  }
+
+This method needs to be called on load (onInit) and when we add a friend.
+In form.component.ts, I create an variable allfriends$ ('the $ sign, makes it clear that this is an observable https://angular.io/guide/rx-library#naming-conventions-for-observables)
+
+
+[source,angularjs]
+  allFriends$: Observable<any>;
+[source,angularjs]
+ngOnInit(): void {
+    this.allFriends$ = this.friendService.getFriends();
+  }
+[source,angularjs]
+addFriend() {
+console.log('add friend');
+const friend: Friend = new Friend(
+this.friendsForm.get('firstName')?.value,
+this.friendsForm.get('lastName')?.value,
+this.friendsForm.get('email')?.value,
+this.friendsForm.get('phone')?.value,
+this.friendsForm.get('favouriteLanguage')?.value,
+);
+this.friendService.addFriend(friend);
+this.allFriends$ = this.friendService.getFriends();
+}
+
+To check if it works, I call the object in the html
+
+[source,angular2html]
+{{allFriends$ | async | json}}
+
 
 
 

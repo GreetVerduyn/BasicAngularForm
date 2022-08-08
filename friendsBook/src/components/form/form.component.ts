@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AddFriendService} from "../../app/services/add-friend.service";
+import {FriendService} from "../../app/services/friend.service";
 import {Friend} from "../../app/models/friend";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-form',
@@ -22,11 +23,13 @@ export class FormComponent implements OnInit {
     favouriteLanguage: new FormControl(''),
   });
 
-  constructor(private addFriendService: AddFriendService) {
+  allFriends$: Observable<any>;
+
+  constructor(private friendService: FriendService) {
   }
 
   ngOnInit(): void {
-
+    this.allFriends$ = this.friendService.getFriends();
   }
 
   showInvalid(field: string): boolean {
@@ -42,8 +45,8 @@ export class FormComponent implements OnInit {
       this.friendsForm.get('phone')?.value,
       this.friendsForm.get('favouriteLanguage')?.value,
     );
-    this.addFriendService.addFriend(friend);
+    this.friendService.addFriend(friend);
+    this.allFriends$ = this.friendService.getFriends();
   }
-
 
 }
