@@ -203,8 +203,45 @@ https://angular.io/guide/observables
     this.http.post(url, friend).subscribe(res => {});
   }
 
- - The service needs to be imported in the app.component.ts and needs a constructor in form.component.ts
+ - The service needs to be imported in the form.component.ts and needs a constructor.
 
 [source,angularjs]
   constructor(private addFriendService: AddFriendService) {
   }
+
+[start=9]
+.Now everything is set up to send data to the local API. (instruction 16)
+
+ - In 'add-friends.service.ts', I set the port to 9000 (const url: string = 'http://localhost:9000/;) and check if it works by
+running the command 'node server' in the server folder of the terminal and navigate to localhost:9000/.
+- In server.js there is an array allFriends. We need to push the 'new friends' to this array.
+ I make a get function and a post function, so the server.js looks like:
+
+[source,angularjs]
+let allFriends = [{fName: 'Coach', lName: 'Tim', email: 'tim.broos@becode.org', phone: '0469420666', signatureMove: 'Yeet', language: 'Javascript'}];
+
+app.get('/', function (request, response) {
+response.send('Hello from server');
+});
+
+app.get('/allFriends', function (request, response) {
+response.send(allFriends);
+});
+
+app.post('/addFriend', function (request, response) {
+console.log('addFriend', request.body);
+allFriends.push(
+{
+fName: request.body.firstName,
+lName: request.body.lastName,
+email: request.body.email,
+phone: request.body.phone,
+language: request.body.favouriteLanguage
+}
+);
+response.send(allFriends);
+});
+
+
+
+
