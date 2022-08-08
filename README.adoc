@@ -278,12 +278,24 @@ this.friendService.addFriend(friend);
 this.allFriends$ = this.friendService.getFriends();
 }
 
-To check if it works, I call the object in the html
+- to check if it works, I call the object in the html
 
 [source,angular2html]
 {{allFriends$ | async | json}}
 
+[start=11]
+. Next step is showing the friends in the template (instruction 18)
+  - I added a div in the html and put the code '<div *ngFor="let friend of allFriends$ | async">' in it.
+ note: the async-pipe (| async) will subscribe to the observable in the template.
 
+In this div, we can call and display the properties.
 
+[source,angular2html]
+<div *ngFor="let friend of allFriends$ | async">
+{{friend.fName}}{{friend.lName}}
+{{friend.email}}
+{{friend.phone}}
+{{friend.language}}
+</div>
 
 

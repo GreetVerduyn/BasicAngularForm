@@ -17,11 +17,17 @@
 
   <input type="submit" value="Submit"   [disabled]="!friendsForm.valid"><br><br>
 
-  {{friendsForm.getRawValue() | json}}
-  {{friendsForm.valid}}
+
 </form>
 
-{{allFriends$ | async | json}}
+
+
+<div *ngFor="let friend of allFriends$ | async">
+  {{friend.fName}}{{friend.lName}}
+  {{friend.email}}
+  {{friend.phone}}
+  {{friend.language}}
+</div>
 
 
 
