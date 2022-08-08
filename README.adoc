@@ -260,10 +260,12 @@ In form.component.ts, I create an variable allfriends$ ('the $ sign, makes it cl
 
 [source,angularjs]
   allFriends$: Observable<any>;
+
 [source,angularjs]
 ngOnInit(): void {
     this.allFriends$ = this.friendService.getFriends();
   }
+
 [source,angularjs]
 addFriend() {
 console.log('add friend');
@@ -287,6 +289,7 @@ this.allFriends$ = this.friendService.getFriends();
 . Next step is showing the friends in the template (instruction 18)
   - I added a div in the html and put the code '<div *ngFor="let friend of allFriends$ | async">' in it.
  note: the async-pipe (| async) will subscribe to the observable in the template.
+https://angular.io/api/common/AsyncPipe
 
 In this div, we can call and display the properties.
 
